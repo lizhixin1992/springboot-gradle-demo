@@ -1,24 +1,24 @@
-server:
-  port: 8088
-  tomcat:
-    uri-encoding: UTF-8
-
-spring:
-  application:
-    name: lzx-test
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
-  aop:
-    auto: true
-
-#安全验证
-management:
-  security:
-    enabled: false
-endpoints:
-  health:
-    sensitive: false
-  shutdown:
-    enabled: true
+#server:
+#  port: 80
+#  tomcat:
+#    uri-encoding: UTF-8
+#
+#spring:
+#  application:
+#    name: lzx-test
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/jsp/
+#      suffix: .jsp
+#  aop:
+#    auto: true
+#
+##安全验证
+#management:
+#  security:
+#    enabled: false
+#endpoints:
+#  health:
+#    sensitive: false
+#  shutdown:
+#    enabled: true

@@ -22,6 +22,10 @@ public class RabbitTest {
     private HelloSender2 helloSender2;
     @Autowired
     private UserSender userSender;
+    @Autowired
+    private TopicSender topicSender;
+    @Autowired
+    private FanoutSender fanoutSender;
 
     @RequestMapping("/hello")
     public void hello() {
@@ -55,5 +59,21 @@ public class RabbitTest {
     @RequestMapping("/userTest")
     public void userTest() {
         userSender.send();
+    }
+
+    /**
+     * topic exchange类型rabbitmq测试
+     */
+    @RequestMapping("/topicTest")
+    public void topicTest() {
+        topicSender.send();
+    }
+
+    /**
+     * fanout exchange类型rabbitmq测试
+     */
+    @RequestMapping("/fanoutTest")
+    public void fanoutTest() {
+        fanoutSender.send();
     }
 }

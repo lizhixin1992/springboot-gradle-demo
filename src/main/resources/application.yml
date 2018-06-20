@@ -29,4 +29,10 @@ spring:
     port: 5672
     username: lzx
     password: lzx
+    #如果消息到达exchange，则ack=true，否则ack=true
     publisher-confirms: true
+    #如果消息无法发送到指定的消息队列那么ReturnCallBack回调方法会被调用
+    publisher-returns: true
+    virtual-host: /
+    template:
+      mandatory: true

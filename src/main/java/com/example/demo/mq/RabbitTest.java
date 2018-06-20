@@ -26,6 +26,8 @@ public class RabbitTest {
     private TopicSender topicSender;
     @Autowired
     private FanoutSender fanoutSender;
+    @Autowired
+    private CallBackSender callBackSender;
 
     @RequestMapping("/hello")
     public void hello() {
@@ -75,5 +77,16 @@ public class RabbitTest {
     @RequestMapping("/fanoutTest")
     public void fanoutTest() {
         fanoutSender.send();
+    }
+
+    /**
+     * publisher-confirms: true
+     * 这个设置是对于exchange，当到达exchange后会返回ack=true，如果有标志的话会同时返回
+     * 如果消息没有到exchange,则confirm回调,ack=false
+     * 如果消息到达exchange,则confirm回调,ack=true
+     */
+    @RequestMapping("/callback")
+    public void callbak() {
+        callBackSender.send();
     }
 }

@@ -22,14 +22,20 @@ public class CallBackSender implements RabbitTemplate.ConfirmCallback {
 
         rabbitTemplatenew.setConfirmCallback(this);
         String msg="callbackSender : i am callback sender";
-        System.out.println(msg );
+//        System.out.println(msg );
         CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-        System.out.println("callbackSender UUID: " + correlationData.getId());
+//        System.out.println("callbackSender UUID: " + correlationData.getId());
+
+        rabbitTemplatenew.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
+            System.out.println("收到回调");
+            System.out.println("return--message:" + new String(message.getBody()) + ",replyCode:" + replyCode + ",replyText:" + replyText + ",exchange:" + exchange + ",routingKey:" + routingKey);
+        });
+
         this.rabbitTemplatenew.convertAndSend("exchange", "topic.messages", msg, correlationData);
     }
 
     public void confirm(CorrelationData correlationData, boolean ack, String cause) {
         // TODO Auto-generated method stub
-        System.out.println("callbakck confirm: " + correlationData.getId());
+//        System.out.println("callbakck confirm: " + correlationData.getId());
     }
 }

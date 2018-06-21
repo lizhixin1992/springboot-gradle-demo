@@ -36,3 +36,14 @@ spring:
     virtual-host: /
     template:
       mandatory: true
+      reply-timeout: 600000
+    #设置开启ack消息确认
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+    cache:
+      channel:
+        checkout-timeout: 3600
+        size: 1000

@@ -44,6 +44,9 @@ spring:
       simple:
         acknowledge-mode: manual
     cache:
+#      connection:
+#        mode: connection
+#        size: 50
       channel:
         checkout-timeout: 3600
-        size: 1000
+        size: 500

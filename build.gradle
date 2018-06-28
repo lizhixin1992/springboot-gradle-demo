@@ -12,7 +12,8 @@ buildscript {
 
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath 'org.springframework:springloaded:1.2.7.RELEASE'
+		classpath('org.springframework:springloaded:1.2.7.RELEASE')
+		classpath('se.transmode.gradle:gradle-docker:1.2')
 	}
 }
 
@@ -20,14 +21,40 @@ apply plugin: 'java'
 //apply plugin: 'eclipse-wtp'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+//apply plugin: 'war'
 apply plugin: 'idea'
+apply plugin: 'docker'
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+group = 'lizhixin'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = 1.8
 
-repositories {
+//这里要是设置，就要保证设置的名称和版本和项目整体的一致，因为docker在生成images时会去寻找打成的jar包
+//jar {
+//	baseName = 'springboot-gradle-demo
+//	version = '0.0.1-SNAPSHOT'
+//}
+
+docker{
+	baseImage 'java:8'
+	maintainer 'lizhixin'
+}
+
+task dockerBuilder(type: Docker) {
+	applicationName = jar.baseName
+	tagVersion = jar.version
+	volume('/tmp')
+	addFile("${jar.baseName}-${jar.version}.jar","app.jar")
+	entryPoint(["java","-Djava.security.egd=file:/dev/./urandom","-jar",'app.jar'])
+	doFirst {
+		copy {
+			from jar
+			into stageDir
+		}
+	}
+}
+
+	repositories {
 //	mavenCentral()
 	maven {
 		url "http://maven.aliyun.com/nexus/content/groups/public/"
@@ -45,5 +72,5 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.apache.commons:commons-lang3:3.7')
 	compile('com.google.guava:guava:21.0')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+//	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

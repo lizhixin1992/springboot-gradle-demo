@@ -72,5 +72,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-aop')
 	compile('org.apache.commons:commons-lang3:3.7')
 	compile('com.google.guava:guava:21.0')
+	compile('redis.clients:jedis:2.9.0')
+	compile('org.springframework.boot:spring-boot-starter-data-redis:2.0.5.RELEASE')
+	compile('org.springframework.data:spring-data-redis:2.1.0.RELEASE')
+	compile('com.alibaba:fastjson:1.2.51')
 //	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

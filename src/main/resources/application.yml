@@ -50,3 +50,16 @@ spring:
       channel:
         checkout-timeout: 3600
         size: 500
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 1ms
+        max-idle: 8
+        min-idle: 0
+
+    timeout: 60000ms

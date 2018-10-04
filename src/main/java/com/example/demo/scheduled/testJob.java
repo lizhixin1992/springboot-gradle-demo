@@ -30,37 +30,37 @@ public class testJob {
         _log.info("离开 test1 job------------------------");
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test2(){
         _log.info("test2 - " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test3(){
         _log.info("test3 - " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test4(){
         _log.info("test4 - " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test5(){
         _log.info("test5 - " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test6(){
         _log.info("test6 - " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test7(){
         _log.info("test7 - " + System.currentTimeMillis());
     }
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test8(){
         _log.info("test8 - " + System.currentTimeMillis());
     }

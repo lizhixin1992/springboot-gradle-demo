@@ -17,7 +17,7 @@ import java.util.Date;
 public class testJob {
     private Logger _log = LoggerFactory.getLogger(testJob.class);
 
-    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(cron = "*/1 * * * * *")
     public void test1(){
         _log.info("进入 test1 job------------------------");
 //        while (true){

@@ -1,6 +1,5 @@
 package com.example.demo.redisUtil;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,16 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/redis")
 public class RedisTest {
 
-    @Autowired
-    private RedisUtils redisUtils;
 
     @RequestMapping(value = "/setString", method = RequestMethod.GET)
     public void setString() throws Exception {
-        redisUtils.set("redisUtil", "test");
+        CacheUtils.set("redisUtil", "test",ExpireTime.NONE);
     }
 
     @RequestMapping(value = "/getString", method = RequestMethod.GET)
     public void getString() throws Exception {
-        System.out.println(redisUtils.get("redisUtil"));
+        System.out.println(CacheUtils.getStr("redisUtil"));
     }
 }

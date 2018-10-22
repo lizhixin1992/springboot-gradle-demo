@@ -27,8 +27,8 @@ spring:
   rabbitmq:
     host: 127.0.0.1
     port: 5672
-    username: lzx
-    password: lzx
+    username: guest
+    password: guest
     #如果消息到达exchange，则ack=true，否则ack=true
     publisher-confirms: true
     #如果消息无法发送到指定的消息队列那么ReturnCallBack回调方法会被调用
@@ -50,11 +50,13 @@ spring:
       channel:
         checkout-timeout: 3600
         size: 500
+
   redis:
     host: 127.0.0.1
     port: 6379
     password:
     database: 0
+
     jedis:
       pool:
         max-active: 8
@@ -63,3 +65,16 @@ spring:
         min-idle: 0
 
     timeout: 60000ms
+
+#    password: redis123
+#    database: 0
+#    timeout: 60000ms
+#    lettuce:
+#      pool:
+#        max-active: 8
+#        max-idle: 8
+#        max-wait: 1ms
+#        min-idle: 0
+#    sentinel:
+#      master: testredis
+#      nodes: 192.168.75.201:6380,192.168.75.202:6380,192.168.75.203:6380

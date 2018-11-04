@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @description:
@@ -9,12 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author: lizhixin
  * @createDate: 15:22 2018/6/15
  */
-@RequestMapping("test")
-@Controller
+@RestController
+@RequestMapping("/test")
 public class TestController {
 
-    @RequestMapping("/")
-    public String test(){
-        return "hello world";
+    @Autowired
+    private ESService esService;
+
+    @RequestMapping("/save")
+    public String save(){
+
+        esService.save();
+        return "save";
+    }
+
+    @RequestMapping("/query")
+    public String query(){
+
+        esService.pageQueryRequest("测试","","2018-10-01 00:00:00","2018-10-31 00:00:00",0,10);
+        return "query";
     }
 }

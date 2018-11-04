@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ContentMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.model.ContentModel">
+        <id column="CONTENTID" property="contentId" jdbcType="INTEGER"/>
+        <result column="MAMID" property="mamId" jdbcType="VARCHAR"/>
+        <result column="UUID" property="uuid" jdbcType="VARCHAR"/>
+        <result column="TITLE" property="title" jdbcType="VARCHAR"/>
+        <result column="SUBTITLE" property="subTitle" jdbcType="VARCHAR"/>
+        <result column="PINYIN" property="pinyin" jdbcType="VARCHAR"/>
+        <result column="TAGS" property="tags" jdbcType="VARCHAR"/>
+        <result column="CONTENTTYPE" property="contentType" jdbcType="VARCHAR"/>
+        <result column="VIDEOTYPE" property="videoType" jdbcType="VARCHAR"/>
+        <result column="VIDEOCLASS" property="videoClass" jdbcType="VARCHAR"/>
+        <!--
+        <result column="MAINCATEGORY" property="mainCategory" jdbcType="VARCHAR"/>
+        <result column="CATEGORYS" property="categorys" jdbcType="VARCHAR"/>
+        -->
+        <result column="CREATEDATE" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="CREATEUSERID" property="createUserId" jdbcType="INTEGER"/>
+        <result column="CREATEUSERNAME" property="createUserName" jdbcType="VARCHAR"/>
+        <result column="Definition" property="definition" jdbcType="VARCHAR"/>
+        <result column="DURATION" property="duration" jdbcType="INTEGER"/>
+        <result column="GRADE" property="grade" jdbcType="REAL"/>
+        <result column="HIMAGE" property="hImage" jdbcType="VARCHAR"/>
+        <result column="MOVIELEVEL" property="movieLevel" jdbcType="INTEGER"/>
+        <result column="OFFLINEDATE" property="offlineDate" jdbcType="TIMESTAMP"/>
+        <result column="PUBLISHDATE" property="publishDate" jdbcType="TIMESTAMP"/>
+        <result column="SITEID" property="siteId" jdbcType="INTEGER"/>
+        <result column="VIMAGE" property="vImage" jdbcType="VARCHAR"/>
+        <result column="copyRight" property="copyright" jdbcType="VARCHAR"/>
+        <result column="copyRightId" property="copyrightId" jdbcType="VARCHAR"/>
+        <result column="ACTORS" property="actors" jdbcType="VARCHAR"/>
+        <result column="AIRTIME" property="airtime" jdbcType="VARCHAR"/>
+        <result column="payStatus" property="payStatus" jdbcType="INTEGER"/>
+        <result column="isCanSearch" property="isCanSearch" jdbcType="INTEGER"/>
+        <result column="bidType" property="bidType" jdbcType="VARCHAR"/>
+        <result column="drm" property="drm" jdbcType="INTEGER"/>
+        <result column="Area" property="area" jdbcType="VARCHAR"/>
+        <result column="DELETEFLAG" property="deleteFlag" jdbcType="INTEGER"/>
+        <result column="DIRECTOR" property="director" jdbcType="VARCHAR"/>
+        <result column="LASTMODIFIEDDATE" property="lastModifiedDate" jdbcType="TIMESTAMP"/>
+        <result column="LASTMODIFIEDUSERID" property="lastModifiedUserId" jdbcType="INTEGER"/>
+        <result column="subCount" property="subCount" jdbcType="INTEGER"/>
+        <result column="SERIESSUM" property="seriesSum" jdbcType="INTEGER"/>
+        <result column="distributeChannelIds" property="distributeChannelIds" jdbcType="VARCHAR"/>
+        <result column="finishDistributeChannelIds" property="finishDistributeChannelIds" jdbcType="VARCHAR"/>
+        <result column="mainProductId" property="mainProductId" jdbcType="VARCHAR"/>
+        <result column="mainVipFlag" property="mainVipFlag" jdbcType="VARCHAR"/>
+        <result column="channelProduct" property="channelProduct" jdbcType="VARCHAR"/>
+        <result column="LANGUAGE" property="language" jdbcType="VARCHAR"/>
+        <result column="REALEXCLUSIVE" property="realExclusive" jdbcType="INTEGER"/>
+
+        <result column="OUT_ID" property="outId" jdbcType="VARCHAR"/>
+        <result column="CR_CLASS_ID" property="crClassId" jdbcType="VARCHAR"/>
+        <result column="PPV_CODE" property="ppvCode" jdbcType="VARCHAR"/>
+        <result column="DATA_PROVIDER" property="dataProvider" jdbcType="VARCHAR"/>
+        <result column="PUBLISH_PLATFORM_IDS" property="publishPlatformIds" jdbcType="VARCHAR"/>
+        <result column="FINISH_PLATFORM_IDS" property="finishPlatformIds" jdbcType="VARCHAR"/>
+        <result column="CP_ID" property="cpId" jdbcType="VARCHAR"/>
+        <result column="FILM_CP_ID" property="filmCpId" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="ISEXQUISITE" property="isExquisite" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithBLOBs" type="com.example.demo.model.ContentModel" extends="BaseResultMap">
+        <result column="DESCRIPTION" property="description" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    CONTENTID, MAMID, UUID, TITLE, SUBTITLE, PINYIN, TAGS, CONTENTTYPE, VIDEOTYPE,
+    VIDEOCLASS, CREATEDATE, STATUS, CREATEUSERID, CREATEUSERNAME,
+    Definition, DURATION, GRADE, HIMAGE, MOVIELEVEL, OFFLINEDATE,
+    PUBLISHDATE, SITEID, VIMAGE, copyRight, copyRightId, ACTORS,
+    AIRTIME, payStatus, isCanSearch, bidType, drm, Area, DELETEFLAG, DIRECTOR, LASTMODIFIEDDATE,
+    LASTMODIFIEDUSERID, subCount, SERIESSUM,distributeChannelIds,finishDistributeChannelIds,mainProductId,
+    mainVipFlag,channelProduct,LANGUAGE,REALEXCLUSIVE,OUT_ID,CR_CLASS_ID,PPV_CODE,DATA_PROVIDER,
+    PUBLISH_PLATFORM_IDS,FINISH_PLATFORM_IDS,CP_ID,FILM_CP_ID,ISEXQUISITE
+  </sql>
+    <sql id="Base_Column_List1">
+    sm.CONTENTID CONTENTID, sm.MAMID MAMID, sm.UUID UUID, sm.TITLE TITLE, sm.SUBTITLE SUBTITLE, sm.PINYIN PINYIN, sm.TAGS TAGS, sm.CONTENTTYPE CONTENTTYPE, sm.VIDEOTYPE VIDEOTYPE,
+    sm.VIDEOCLASS VIDEOCLASS, sm.CREATEDATE CREATEDATE, sm.STATUS STATUS, sm.CREATEUSERID CREATEUSERID, sm.CREATEUSERNAME CREATEUSERNAME,
+    sm.Definition Definition, sm.DURATION DURATION, sm.GRADE GRADE, sm.HIMAGE HIMAGE, sm.MOVIELEVEL MOVIELEVEL, sm.OFFLINEDATE OFFLINEDATE,
+    sm.PUBLISHDATE PUBLISHDATE, sm.SITEID SITEID, sm.VIMAGE VIMAGE, sm.copyRight copyRight, sm.copyRightId copyRightId, sm.ACTORS ACTORS,
+    sm.AIRTIME AIRTIME, sm.payStatus payStatus, sm.isCanSearch isCanSearch, sm.bidType bidType, sm.drm drm, sm.Area Area, sm.DELETEFLAG DELETEFLAG, sm.DIRECTOR DIRECTOR, sm.LASTMODIFIEDDATE LASTMODIFIEDDATE,
+    sm.LASTMODIFIEDUSERID LASTMODIFIEDUSERID, sm.subCount subCount, sm.SERIESSUM SERIESSUM,sm.distributeChannelIds distributeChannelIds,sm.finishDistributeChannelIds finishDistributeChannelIds,sm.mainProductId mainProductId,
+    sm.mainVipFlag mainVipFlag,sm.channelProduct channelProduct,sm.LANGUAGE LANGUAGE,sm.REALEXCLUSIVE REALEXCLUSIVE,sm.OUT_ID OUT_ID,sm.CR_CLASS_ID CR_CLASS_ID,sm.PPV_CODE PPV_CODE,sm.DATA_PROVIDER DATA_PROVIDER,
+    sm.PUBLISH_PLATFORM_IDS PUBLISH_PLATFORM_IDS,sm.FINISH_PLATFORM_IDS FINISH_PLATFORM_IDS,sm.CP_ID CP_ID,sm.FILM_CP_ID FILM_CP_ID,sm.ISEXQUISITE ISEXQUISITE
+  </sql>
+    <sql id="Blob_Column_List">
+    DESCRIPTION
+  </sql>
+    <select id="selectAllModel" resultMap="ResultMapWithBLOBs">
+        select * from content order by contentId desc limit 0,100
+    </select>
+</mapper>

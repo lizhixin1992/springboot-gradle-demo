@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.amqp.core.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
+@MapperScan("com.example.demo.dao")
 public class DemoApplication {
 
 	final static String queueName = "hello";
@@ -101,6 +103,7 @@ public class DemoApplication {
 
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, "--server.port=8080");
+		System.setProperty("es.set.netty.runtime.available.processors", "false");
+		SpringApplication.run(DemoApplication.class, "--server.port=8090");
 	}
 }

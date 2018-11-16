@@ -83,8 +83,8 @@ spring:
 
   data:
     elasticsearch:
-      cluster-name: elasticsearch_lizhixin
-      cluster-nodes: 127.0.0.1:9300
+      cluster-name: elasticsearch
+      cluster-nodes: 127.0.0.1:9200
 #  elasticsearch:
 #    jest:
 #      uris: 192.168.24.226:9300

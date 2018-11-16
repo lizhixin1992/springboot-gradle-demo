@@ -57,6 +57,8 @@ public class DemoApplicationTests {
 //        System.out.println("sum is:"+nums.stream().filter(num -> num != null).distinct().mapToInt(num -> num * 2).peek(System.out::println).skip(2).limit(4).sum());
 
 //        System.out.println(nums.stream().filter(num -> num != null).collect(Collectors.toList()));
+
+//        String a = {"title":"疾速天使","subTitle":"基因改造引发物种杀戮","pinyin":"jsts","tags":"","contentType":"PS","videoType":"电影","videoClass":"喜剧|动作|冒险","createDate":1542346545949,"status":1,"definition":"4K|HD|SD|X","description":"\"疾速天使” 系列是当今颇具影响、广受青少年喜爱的小说，作品将科幻与奇幻元素巧妙地融为一体，充满了速度感、悬疑感和冲击力。六个孩子被送入实验室接受残酷的基因改造，变成了长有翅膀拥有超能力的鸟孩。他们逃离、反叛，在残酷的试炼中发现他们的力量正是为了这个世界而存在。\n故事极像快速推进的大片，充满悬疑的故事、环环相扣的谜团、匪夷所思的超能力。不断切换的场景，第一人称的叙述方式，带读者迅速进入故事情境。让读者与六个孩子一起遭遇挫折、触摸感动，踏上探索生命真谛与未来命运的旅程！","duration":0,"grade":6.4,"hImage":"http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/hori/7/7ubvbd3wlslzcsj_e.jpg","movieLevel":1,"publishDate":1522250281000,"vImage":"http://i.gtimg.cn/qqlive/img/jpgcache/files/qqvideo/7/7ubvbd3wlslzcsj_x.jpg","copyRight":"tx","copyRightId":"","actors":"","airtime":"","area":"","director":"","seriesSum":0,"language":"","recentNum":0,"isFinish":1,"vipFlag":"1","apps":[{"appId":"com.newtv.cboxtv","contentId":672574,"source":"tx"}]};
     }
 
 }

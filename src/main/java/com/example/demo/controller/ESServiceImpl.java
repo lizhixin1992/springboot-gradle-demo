@@ -3,8 +3,11 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.ContentMapper;
+import com.example.demo.model.Content;
 import com.example.demo.model.ContentModel;
 import com.example.demo.util.CalendarUtil;
+import com.example.demo.util.OkHttpUtil;
+import okhttp3.Response;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
@@ -26,8 +29,12 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -63,22 +70,41 @@ public class ESServiceImpl implements ESService{
         System.out.println(list.size());
 
         for (ContentModel contentModel : list) {
-            JSONObject jsonObject = JSONObject.parseObject(contentModel.toString());
-            jsonObject.put("createDate",contentModel.getCreateDate().getTime());
-            System.out.println(jsonObject.toString());
-            // 构建请求
-            IndexRequest request = new IndexRequest("icms.data", "content", contentModel.getUuid());
-            // 将保存数据以JSON格式关联到请求
-            request.source(jsonObject, XContentType.JSON);
-            // Java客户端发起保存数据请求
-            IndexResponse response = null;
+            Content esContent = new Content(contentModel);
+
             try {
-                response = RestClientFactory.getHighLevelClient().index(request);
-            } catch (IOException e) {
+                Response response = OkHttpUtil.postJson("http://localhost:8080/test/save", JSONObject.toJSONString(esContent));
+                System.out.println(response.toString());
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-            // 等待结果
-            System.out.println(response);
+
+
+//            try {
+//                URL url = new URL("http://localhost:8080/test/save");
+//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+//                httpURLConnection.setDoOutput(true);
+//                OutputStream outputStream = httpURLConnection.getOutputStream();
+//                outputStream.
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+//            // 构建请求
+//            IndexRequest request = new IndexRequest("content.test", "_doc", UUID.randomUUID().toString().replace("-", ""));
+//            // 将保存数据以JSON格式关联到请求
+//            System.out.println(JSONObject.toJSON(esContent));
+//            request.source(JSONObject.toJSON(esContent), XContentType.JSON);
+//            // Java客户端发起保存数据请求
+//            IndexResponse response = null;
+//            try {
+//                response = RestClientFactory.getHighLevelClient().index(request);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+////                continue;
+//            }
+//            // 等待结果
+//            System.out.println(response);
         }
     }
 

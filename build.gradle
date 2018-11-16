@@ -88,4 +88,6 @@ dependencies {
 //	compile('org.elasticsearch:elasticsearch:6.4.2')
 	compile('org.elasticsearch.client:elasticsearch-rest-high-level-client:6.4.2')
 //	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	compile('com.squareup.okhttp3:okhttp:3.9.0')
 }

@@ -72,39 +72,31 @@ public class ESServiceImpl implements ESService{
         for (ContentModel contentModel : list) {
             Content esContent = new Content(contentModel);
 
+//            try {
+//                Response response = OkHttpUtil.postJson("http://localhost:8080/test/save", JSONObject.toJSONString(esContent));
+//                System.out.println(response.toString());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
+
+            // 构建请求
+            IndexRequest request = new IndexRequest("content.test", "_doc", UUID.randomUUID().toString().replace("-", ""));
+            // 将保存数据以JSON格式关联到请求
+            System.out.println(JSONObject.toJSON(esContent));
+            JSONObject jsonObject = JSONObject.parseObject(JSONObject.toJSONString(esContent));
+            jsonObject.put("grade", esContent.getGrade());
+            request.source(jsonObject, XContentType.JSON);
+            // Java客户端发起保存数据请求
+            IndexResponse response = null;
             try {
-                Response response = OkHttpUtil.postJson("http://localhost:8080/test/save", JSONObject.toJSONString(esContent));
-                System.out.println(response.toString());
-            } catch (Exception e) {
+                response = RestClientFactory.getHighLevelClient().index(request);
+            } catch (IOException e) {
                 e.printStackTrace();
+//                continue;
             }
-
-
-//            try {
-//                URL url = new URL("http://localhost:8080/test/save");
-//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//                httpURLConnection.setDoOutput(true);
-//                OutputStream outputStream = httpURLConnection.getOutputStream();
-//                outputStream.
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-//            // 构建请求
-//            IndexRequest request = new IndexRequest("content.test", "_doc", UUID.randomUUID().toString().replace("-", ""));
-//            // 将保存数据以JSON格式关联到请求
-//            System.out.println(JSONObject.toJSON(esContent));
-//            request.source(JSONObject.toJSON(esContent), XContentType.JSON);
-//            // Java客户端发起保存数据请求
-//            IndexResponse response = null;
-//            try {
-//                response = RestClientFactory.getHighLevelClient().index(request);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-////                continue;
-//            }
-//            // 等待结果
-//            System.out.println(response);
+            // 等待结果
+            System.out.println(response);
         }
     }
 

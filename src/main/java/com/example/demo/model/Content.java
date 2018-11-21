@@ -19,57 +19,23 @@ public class Content {
 
     private String subTitle;
 
-    private String pinyin;
-
     private String tags;
 
-    private String contentType;
-
-    private String videoType;
-
-    private String videoClass;
-
     private Long createDate;
-
-    private Integer status;
-
-    private String definition;
 
     private String description;
 
     private Long duration;
 
-    private Float grade;
-
-    private String hImage;
-
     private Integer movieLevel;
-
-    private Long publishDate;
-
-    private String vImage;
-
-    private String copyRight;
-
-    private String copyRightId;
 
     private String actors;
 
-    private String airtime;
+    private String year;
 
     private String area;
 
     private String director;
-
-    private Integer seriesSum;
-
-    private String language;
-
-    private Integer recentNum;
-
-    private Integer isFinish;
-
-    private String vipFlag;
 
     private Object apps;
 
@@ -93,45 +59,13 @@ public class Content {
             subTitle = "";
         }
 
-        if(StringUtils.isNotEmpty(contentModel.getPinyin())){
-            pinyin = contentModel.getPinyin();
-        }else{
-            pinyin = "";
-        }
-
         if(StringUtils.isNotEmpty(contentModel.getTags())){
             tags = contentModel.getTags();
         }else{
             tags = "";
         }
 
-        if(StringUtils.isNotEmpty(contentModel.getContentType())){
-            contentType = contentModel.getContentType();
-        }else{
-            contentType = "";
-        }
-
-        if(StringUtils.isNotEmpty(contentModel.getVideoType())){
-            videoType = contentModel.getVideoType();
-        }else{
-            videoType = "";
-        }
-
-        if(StringUtils.isNotEmpty(contentModel.getVideoClass())){
-            videoClass = contentModel.getVideoClass();
-        }else{
-            videoClass = "";
-        }
-
         createDate = CalendarUtil.currentTimestamp().getTime();
-
-        status = 1;
-
-        if(StringUtils.isNotEmpty(contentModel.getDefinition())){
-            definition = contentModel.getDefinition();
-        }else{
-            definition = "";
-        }
 
         if(StringUtils.isNotEmpty(contentModel.getDescription())){
             description = contentModel.getDescription();
@@ -145,43 +79,12 @@ public class Content {
             duration = 0L;
         }
 
-        if(contentModel.getGrade() != null){
-            grade = contentModel.getGrade();
-        }else{
-            grade = 0.0f;
-        }
-
-        if(StringUtils.isNotEmpty(contentModel.gethImage())){
-            hImage = contentModel.gethImage();
-        }else{
-            hImage = "";
-        }
-
         if(contentModel.getMovieLevel() != null){
             movieLevel = contentModel.getMovieLevel();
         }else{
             movieLevel = 0;
         }
 
-        publishDate = contentModel.getPublishDate() == null ? CalendarUtil.currentTimestamp().getTime():contentModel.getPublishDate().getTime();
-
-        if(StringUtils.isNotEmpty(contentModel.getvImage())){
-            vImage = contentModel.getvImage();
-        }else{
-            vImage = "";
-        }
-
-        if(StringUtils.isNotEmpty(contentModel.getCopyright())){
-            copyRight = contentModel.getCopyright();
-        }else{
-            copyRight = "";
-        }
-
-        if(StringUtils.isNotEmpty(contentModel.getCopyrightId())){
-            copyRightId = contentModel.getCopyrightId();
-        }else{
-            copyRightId = "";
-        }
 
         if(StringUtils.isNotEmpty(contentModel.getActors())){
             actors = contentModel.getActors();
@@ -190,9 +93,9 @@ public class Content {
         }
 
         if(StringUtils.isNotEmpty(contentModel.getAirtime())){
-            airtime = contentModel.getAirtime();
+            year = contentModel.getAirtime();
         }else{
-            airtime = "";
+            year = "";
         }
 
         if(StringUtils.isNotEmpty(contentModel.getArea())){
@@ -207,27 +110,32 @@ public class Content {
             director = "";
         }
 
-        seriesSum = 0;
-
-        if(StringUtils.isNotEmpty(contentModel.getLanguage())){
-            language = contentModel.getLanguage();
-        }else{
-            language = "";
-        }
-
-        recentNum = 0;
-
-        isFinish = 1;
-
-        vipFlag = contentModel.getMainVipFlag()==null?"":contentModel.getMainVipFlag();
-
         List<Object> appsList = new ArrayList<>();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("appId", "com.newtv.cboxtv");
         jsonObject.put("contentId",contentModel.getContentId());
         jsonObject.put("source", contentModel.getMamId());
+        jsonObject.put("contentType", contentModel.getContentType() != null ? contentModel.getContentType() : "");
+        jsonObject.put("definition", contentModel.getDefinition() != null ? contentModel.getDefinition() : 0L);
+        jsonObject.put("grade", contentModel.getGrade());
+        jsonObject.put("hImage", contentModel.gethImage() != null ? contentModel.gethImage() : "");
+        jsonObject.put("vImage", contentModel.getvImage() != null ? contentModel.getvImage() : "");
+        jsonObject.put("publishDate", contentModel.getPublishDate() != null ? contentModel.getPublishDate() : CalendarUtil.currentTimestamp().getTime());
+        jsonObject.put("copyRight", contentModel.getCopyright() != null ? contentModel.getCopyright() : "");
+        jsonObject.put("copyRightId", contentModel.getCopyrightId() != null ? contentModel.getCopyrightId() : "");
+        jsonObject.put("language", contentModel.getLanguage() != null ? contentModel.getLanguage() : "");
+        jsonObject.put("vipFlag", contentModel.getMainVipFlag()==null?"":contentModel.getMainVipFlag());
+        jsonObject.put("category", contentModel.getVideoType() != null ? contentModel.getVideoType() : "");
         appsList.add(jsonObject);
         apps = appsList;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -246,14 +154,6 @@ public class Content {
         this.subTitle = subTitle;
     }
 
-    public String getPinyin() {
-        return pinyin;
-    }
-
-    public void setPinyin(String pinyin) {
-        this.pinyin = pinyin;
-    }
-
     public String getTags() {
         return tags;
     }
@@ -262,52 +162,12 @@ public class Content {
         this.tags = tags;
     }
 
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getVideoType() {
-        return videoType;
-    }
-
-    public void setVideoType(String videoType) {
-        this.videoType = videoType;
-    }
-
-    public String getVideoClass() {
-        return videoClass;
-    }
-
-    public void setVideoClass(String videoClass) {
-        this.videoClass = videoClass;
-    }
-
     public Long getCreateDate() {
         return createDate;
     }
 
     public void setCreateDate(Long createDate) {
         this.createDate = createDate;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getDefinition() {
-        return definition;
-    }
-
-    public void setDefinition(String definition) {
-        this.definition = definition;
     }
 
     public String getDescription() {
@@ -326,60 +186,12 @@ public class Content {
         this.duration = duration;
     }
 
-    public Float getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Float grade) {
-        this.grade = grade;
-    }
-
-    public String gethImage() {
-        return hImage;
-    }
-
-    public void sethImage(String hImage) {
-        this.hImage = hImage;
-    }
-
     public Integer getMovieLevel() {
         return movieLevel;
     }
 
     public void setMovieLevel(Integer movieLevel) {
         this.movieLevel = movieLevel;
-    }
-
-    public Long getPublishDate() {
-        return publishDate;
-    }
-
-    public void setPublishDate(Long publishDate) {
-        this.publishDate = publishDate;
-    }
-
-    public String getvImage() {
-        return vImage;
-    }
-
-    public void setvImage(String vImage) {
-        this.vImage = vImage;
-    }
-
-    public String getCopyRight() {
-        return copyRight;
-    }
-
-    public void setCopyRight(String copyRight) {
-        this.copyRight = copyRight;
-    }
-
-    public String getCopyRightId() {
-        return copyRightId;
-    }
-
-    public void setCopyRightId(String copyRightId) {
-        this.copyRightId = copyRightId;
     }
 
     public String getActors() {
@@ -390,12 +202,12 @@ public class Content {
         this.actors = actors;
     }
 
-    public String getAirtime() {
-        return airtime;
+    public String getYear() {
+        return year;
     }
 
-    public void setAirtime(String airtime) {
-        this.airtime = airtime;
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getArea() {
@@ -414,59 +226,11 @@ public class Content {
         this.director = director;
     }
 
-    public Integer getSeriesSum() {
-        return seriesSum;
-    }
-
-    public void setSeriesSum(Integer seriesSum) {
-        this.seriesSum = seriesSum;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public Integer getRecentNum() {
-        return recentNum;
-    }
-
-    public void setRecentNum(Integer recentNum) {
-        this.recentNum = recentNum;
-    }
-
-    public Integer getIsFinish() {
-        return isFinish;
-    }
-
-    public void setIsFinish(Integer isFinish) {
-        this.isFinish = isFinish;
-    }
-
-    public String getVipFlag() {
-        return vipFlag;
-    }
-
-    public void setVipFlag(String vipFlag) {
-        this.vipFlag = vipFlag;
-    }
-
     public Object getApps() {
         return apps;
     }
 
     public void setApps(Object apps) {
         this.apps = apps;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 }

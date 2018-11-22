@@ -1,48 +1,50 @@
-//package com.example.demo.controller;
-//
-//import com.alibaba.fastjson.JSONObject;
-//import com.example.demo.dao.ContentMapper;
-//import com.example.demo.model.ContentModel;
-//import com.example.demo.util.CalendarUtil;
-//import org.elasticsearch.action.index.IndexRequest;
-//import org.elasticsearch.action.index.IndexResponse;
-//import org.elasticsearch.action.search.SearchRequest;
-//import org.elasticsearch.action.search.SearchResponse;
-//import org.elasticsearch.client.RestHighLevelClient;
-//import org.elasticsearch.common.unit.TimeValue;
-//import org.elasticsearch.common.xcontent.XContentType;
-//import org.elasticsearch.index.query.*;
-//import org.elasticsearch.search.SearchHit;
-//import org.elasticsearch.search.SearchHits;
-//import org.elasticsearch.search.builder.SearchSourceBuilder;
-//import org.elasticsearch.search.sort.FieldSortBuilder;
-//import org.elasticsearch.search.sort.SortBuilders;
-//import org.elasticsearch.search.sort.SortOrder;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-//import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-//import org.springframework.stereotype.Service;
-//
-//import java.io.IOException;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.concurrent.TimeUnit;
-//
-///**
-// * @ClassName
-// * @Description TODO
-// * @Date 2018/11/2 2:17 PM
-// **/
-//@Service
-//public class ESServiceImpl implements ESService{
-//
+package com.example.demo.controller;
+
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.dao.ContentMapper;
+import com.example.demo.model.Content;
+import com.example.demo.model.ContentModel;
+import com.example.demo.util.CalendarUtil;
+import com.example.demo.util.JestUtil;
+import org.elasticsearch.action.index.IndexRequest;
+import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.*;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @ClassName
+ * @Description TODO
+ * @Date 2018/11/2 2:17 PM
+ **/
+@Service
+public class ESServiceImpl implements ESService{
+
 //    @Autowired
 //    private ESRepository esRepository;
-//
-//    @Autowired
-//    private ContentMapper contentMapper;
-//
+
+    @Autowired
+    private ContentMapper contentMapper;
+
 //    @Override
 //    public Object get() {
 //        BoolQueryBuilder builder = QueryBuilders.boolQuery();
@@ -55,32 +57,23 @@
 //        Page<ContentModel> page = esRepository.search(query);
 //        return page;
 //    }
-//
-//    @Override
-//    public void save() {
-//        List<ContentModel> list = contentMapper.selectAllModel();
-//        System.out.println(list.size());
-//
-//        for (ContentModel contentModel : list) {
-//            try {
-//                JSONObject jsonObject = JSONObject.parseObject(contentModel.toString());
-//                jsonObject.put("createDate",contentModel.getCreateDate().getTime());
-//                System.out.println(jsonObject.toString());
-//                // 构建请求
-//                IndexRequest request = new IndexRequest("icms.data", "content", contentModel.getContentId() + "");
-//                // 将保存数据以JSON格式关联到请求
-//                request.source(jsonObject.toJSONString(), XContentType.JSON);
-//                // Java客户端发起保存数据请求
-//                IndexResponse response = null;
-//                response = RestClientFactory.getHighLevelClient().index(request);
-//                // 等待结果
-//                System.out.println(response);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
+
+    @Override
+    public void save() {
+        List<ContentModel> list = contentMapper.selectAllModel();
+        System.out.println(list.size());
+
+        for (ContentModel contentModel : list) {
+            Content esContent = new Content(contentModel);
+
+            try {
+                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 //    @Override
 //    public SearchResponse pageQueryRequest(String keyword1, String keyword2, String startDate, String endDate,
 //                                           int start, int size){
@@ -142,4 +135,4 @@
 //
 //        return response;
 //    }
-//}
+}

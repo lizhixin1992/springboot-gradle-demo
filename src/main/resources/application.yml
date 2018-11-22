@@ -88,8 +88,8 @@ spring:
 
   elasticsearch:
     jest:
-#      uris: 192.168.24.226:9300
-      read-timeout: 60s
+      connection-timeout: 60s
+      username: elasticsearch_lizhixin
 
 
   datasource:
@@ -100,6 +100,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
+
 
 mybatis:
   typeAliasesPackage: com.example.demo.entity

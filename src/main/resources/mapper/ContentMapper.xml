@@ -92,6 +92,6 @@
     DESCRIPTION
   </sql>
     <select id="selectAllModel" resultMap="ResultMapWithBLOBs">
-        select * from content where contentType = 'PS' and status = 6 order by contentId limit 0,2000
+        select * from content where contentType = 'PS' and status = 6 order by contentId limit 0,200
     </select>
 </mapper>

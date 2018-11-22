@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.util.CalendarUtil;
+import io.searchbox.annotations.JestId;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -13,11 +13,14 @@ import java.util.*;
  **/
 public class Content {
 
+    @JestId
     private String id;
 
     private String title;
 
     private String subTitle;
+
+    private String contentType;
 
     private String tags;
 
@@ -44,7 +47,7 @@ public class Content {
     }
 
     public Content(ContentModel contentModel){
-        id = java.util.UUID.randomUUID().toString().replaceAll("-","");
+//        id = java.util.UUID.randomUUID().toString().replaceAll("-","");
 
 
         if(StringUtils.isNotEmpty(contentModel.getTitle())){
@@ -59,13 +62,15 @@ public class Content {
             subTitle = "";
         }
 
+        contentType = "1001";
+
         if(StringUtils.isNotEmpty(contentModel.getTags())){
             tags = contentModel.getTags();
         }else{
             tags = "";
         }
 
-        createDate = CalendarUtil.currentTimestamp().getTime();
+        createDate = System.currentTimeMillis();
 
         if(StringUtils.isNotEmpty(contentModel.getDescription())){
             description = contentModel.getDescription();
@@ -110,22 +115,65 @@ public class Content {
             director = "";
         }
 
+        String category = "";
+        switch (contentModel.getVideoType()){
+            case "电影":
+                category = "1000001";
+                break;
+            case "电视剧":
+                category = "1000002";
+                break;
+            case "综艺":
+                category = "1000004";
+                break;
+            case "体育":
+                category = "1000006";
+                break;
+            case "资讯":
+                category = "1000027";
+                break;
+            case "财经":
+                category = "1000023";
+                break;
+            case "少儿":
+                category = "1000024";
+                break;
+            case "教育":
+                category = "1000007";
+                break;
+            case "动漫":
+                category = "1000003";
+                break;
+            case "纪录片":
+                category = "1000009";
+                break;
+            case "音乐":
+                category = "1000005";
+                break;
+            case "汽车":
+                category = "1000026";
+                break;
+            default:
+                category = "1000013";
+                break;
+        }
+
         List<Object> appsList = new ArrayList<>();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("appId", "com.newtv.cboxtv");
-        jsonObject.put("contentId",contentModel.getContentId());
-        jsonObject.put("source", contentModel.getMamId());
-        jsonObject.put("contentType", contentModel.getContentType() != null ? contentModel.getContentType() : "");
+        jsonObject.put("contentId",contentModel.getContentId().toString());
+        jsonObject.put("source", "newtv");
+//        jsonObject.put("contentType", contentModel.getContentType() != null ? contentModel.getContentType() : "");
         jsonObject.put("definition", contentModel.getDefinition() != null ? contentModel.getDefinition() : 0L);
         jsonObject.put("grade", contentModel.getGrade());
         jsonObject.put("hImage", contentModel.gethImage() != null ? contentModel.gethImage() : "");
         jsonObject.put("vImage", contentModel.getvImage() != null ? contentModel.getvImage() : "");
-        jsonObject.put("publishDate", contentModel.getPublishDate() != null ? contentModel.getPublishDate() : CalendarUtil.currentTimestamp().getTime());
+        jsonObject.put("publishDate", contentModel.getPublishDate() != null ? contentModel.getPublishDate().getTime() : System.currentTimeMillis());
         jsonObject.put("copyRight", contentModel.getCopyright() != null ? contentModel.getCopyright() : "");
         jsonObject.put("copyRightId", contentModel.getCopyrightId() != null ? contentModel.getCopyrightId() : "");
         jsonObject.put("language", contentModel.getLanguage() != null ? contentModel.getLanguage() : "");
         jsonObject.put("vipFlag", contentModel.getMainVipFlag()==null?"":contentModel.getMainVipFlag());
-        jsonObject.put("category", contentModel.getVideoType() != null ? contentModel.getVideoType() : "");
+        jsonObject.put("category", category);
         appsList.add(jsonObject);
         apps = appsList;
     }

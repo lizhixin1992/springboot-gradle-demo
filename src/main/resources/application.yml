@@ -81,22 +81,27 @@ spring:
 #      nodes: 192.168.75.201:6380,192.168.75.202:6380,192.168.75.203:6380
 
 
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch
-      cluster-nodes: 127.0.0.1:9200
-#  elasticsearch:
-#    jest:
-#      uris: 192.168.24.226:9300
+
+#  data:
+#    elasticsearch:
+#      cluster-name: elasticsearch_lizhixin
+#      cluster-nodes: 127.0.0.1:9300
+
+  elasticsearch:
+    jest:
+      connection-timeout: 60s
+      username: elasticsearch_lizhixin
+
 
   datasource:
-#    url: jdbc:mysql://192.168.75.204:3306/icms_data?useUnicode=true&characterEncoding=utf-8
-    url: jdbc:mysql://localhost:3306/icms_data
+    url: jdbc:mysql://192.168.75.204:3306/icms_data?useUnicode=true&characterEncoding=utf-8
+#    url: jdbc:mysql://localhost:3306/icms_data
     userName: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
+
 
 mybatis:
   typeAliasesPackage: com.example.demo.entity

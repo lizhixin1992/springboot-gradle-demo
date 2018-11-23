@@ -34,6 +34,12 @@ public class TestController {
         return "save";
     }
 
+    @RequestMapping("/delete")
+    public String delete(){
+        esService.delete();
+        return "delete";
+    }
+
 //    @RequestMapping("/query")
 //    public ResponseEntity query(){
 //

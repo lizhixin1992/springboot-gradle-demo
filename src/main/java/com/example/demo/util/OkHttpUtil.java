@@ -36,7 +36,44 @@ public class OkHttpUtil {
                     .post(requestBody)
                     .url(url)
                     .header("User-Agent", "")
-                    .addHeader("Authorization", "")
+                    .addHeader("Authorization", "QmFzaWMgMTAwMDAwMDA6YzAzZmIzYmFkMzhkNGQyMGFmYzZlZGY3MzJlZDRiYzY=")
+                    .build();
+
+            response = okHttpClient.newCall(request).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(response.isSuccessful()){
+            System.out.println(response.isSuccessful());
+            return response;
+        }else{
+            System.out.println(response.isSuccessful());
+            return null;
+        }
+    }
+
+    /**
+     *@description: delete请求（contentType=application/json）
+     *@params:
+     *@author: lizhixin
+     *@createDate: 14:51 2017/10/23
+     */
+    public static Response deleteJson(String url,String dataJson) throws Exception {
+        Response response = null;
+        try {
+            String sendType = "POST";
+            String contentType = "application/json";
+            OkHttpClient okHttpClient = new OkHttpClient();
+
+            MediaType mediaType = MediaType.parse(contentType);
+            RequestBody requestBody = RequestBody.create(mediaType,dataJson);
+
+            Request request = new Request.Builder()
+                    .delete(requestBody)
+                    .url(url)
+                    .header("User-Agent", "")
+                    .addHeader("Authorization", "QmFzaWMgMTAwMDAwMDA6YzAzZmIzYmFkMzhkNGQyMGFmYzZlZGY3MzJlZDRiYzY=")
                     .build();
 
             response = okHttpClient.newCall(request).execute();

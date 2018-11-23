@@ -12,5 +12,7 @@ public interface ESService {
 
     void save();
 
+    void delete();
+
 //    SearchResponse pageQueryRequest(String keyword1, String keyword2, String startDate, String endDate, int start, int size);
 }

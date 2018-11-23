@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.ContentMapper;
 import com.example.demo.model.Content;
 import com.example.demo.model.ContentModel;
 import com.example.demo.util.CalendarUtil;
+import com.example.demo.util.JsonUtil;
 import com.example.demo.util.OkHttpUtil;
 import okhttp3.Response;
 import com.example.demo.util.JestUtil;
@@ -31,6 +33,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -65,30 +68,58 @@ public class ESServiceImpl implements ESService{
 
     @Override
     public void save() {
-        List<ContentModel> list = contentMapper.selectAllModel();
-        System.out.println(list.size());
+        Integer total = contentMapper.selectCount();
+        int max = (int) total / 200;
+        for (int i = 0; i <= max; i++) {
 
-        for (ContentModel contentModel : list) {
-            Content esContent = new Content(contentModel);
+            List<ContentModel> list = contentMapper.selectAllModel(i*200,200);
+            System.out.println(list.size());
+            List<Object> dataList = new ArrayList<>();
+            for (ContentModel contentModel : list) {
+                Content esContent = new Content(contentModel);
+                dataList.add(esContent);
 
 //            try {
-//                Response response = OkHttpUtil.postJson("http://localhost:8080/test/save", JSONObject.toJSONString(esContent));
-//                System.out.println(response.toString());
+//                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-
-
+            }
             try {
-                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
+            Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataList));
+//                Response response = OkHttpUtil.postJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
+                System.out.println(response.toString());
             } catch (Exception e) {
                 e.printStackTrace();
-//                continue;
             }
         }
     }
 
-//    @Override
+    @Override
+    public void delete() {
+//        List<ContentModel> list = contentMapper.selectAllModel();
+//        System.out.println(list.size());
+//        List<Object> dataList = new ArrayList<>();
+//        for (ContentModel contentModel : list) {
+//            Content esContent = new Content(contentModel);
+//            dataList.add(esContent.getContentId());
+//
+////            try {
+////                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
+////            } catch (Exception e) {
+////                e.printStackTrace();
+////            }
+//        }
+//        try {
+////            Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataList));
+//            Response response = OkHttpUtil.deleteJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
+//            System.out.println(response.toString());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    //    @Override
 //    public SearchResponse pageQueryRequest(String keyword1, String keyword2, String startDate, String endDate,
 //                                           int start, int size){
 //        RestHighLevelClient client = RestClientFactory.getHighLevelClient();

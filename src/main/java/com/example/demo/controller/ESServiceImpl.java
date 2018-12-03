@@ -87,7 +87,7 @@ public class ESServiceImpl implements ESService {
                 Map<String, Object> dataMap = new HashMap<>();
                 dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
                 dataMap.put("data",dataList);
-                Response response = OkHttpUtil.postJson("http://localhost:8080/new/contents", JSON.toJSONString(dataMap));
+                Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataMap));
 //                Response response = OkHttpUtil.postJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
                 System.out.println(response.toString());
             } catch (Exception e) {
@@ -119,7 +119,7 @@ public class ESServiceImpl implements ESService {
                 Map<String, Object> dataMap = new HashMap<>();
                 dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
                 dataMap.put("data",dataList);
-                Response response = OkHttpUtil.deleteJson("http://localhost:8080/new/contents", JSON.toJSONString(dataMap));
+                Response response = OkHttpUtil.deleteJson("http://localhost:8080/contents", JSON.toJSONString(dataMap));
 //            Response response = OkHttpUtil.deleteJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
                 System.out.println(response.toString());
             } catch (Exception e) {

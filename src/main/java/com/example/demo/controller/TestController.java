@@ -7,6 +7,7 @@ import org.elasticsearch.search.SearchHits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +39,11 @@ public class TestController {
     public String delete(){
         esService.delete();
         return "delete";
+    }
+
+    @RequestMapping("/callBack")
+    public void callBack(@RequestBody String data){
+        System.out.println(data);
     }
 
 //    @RequestMapping("/query")

@@ -91,20 +91,20 @@
     <sql id="Blob_Column_List">
     DESCRIPTION
   </sql>
-    <!--<select id="selectAllModel" resultMap="ResultMapWithBLOBs">-->
-        <!--select * from content where contentType = 'PS' and status = 6 and siteId = 11 limit ${start},${size}-->
-    <!--</select>-->
-
-    <!--<select id="selectCount" resultType="java.lang.Integer">-->
-        <!--select count(*) from content where contentType = 'PS' and status = 6 and siteId = 11-->
-    <!--</select>-->
-
     <select id="selectAllModel" resultMap="ResultMapWithBLOBs">
-      select * from content where contentType = 'PS' and status = 6 order by contentId limit 0,200;
+        select * from content where contentType = 'PS' and status = 6 and siteId = 11 limit ${start},${size}
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">
-      select count(*) from content where contentType = 'PS' and status = 6
+        select count(*) from content where contentType = 'PS' and status = 6 and siteId = 11
     </select>
+
+    <!--<select id="selectAllModel" resultMap="ResultMapWithBLOBs">-->
+      <!--select * from content where contentType = 'PS' and status = 6 order by contentId limit 0,200;-->
+    <!--</select>-->
+
+    <!--<select id="selectCount" resultType="java.lang.Integer">-->
+      <!--select count(*) from content where contentType = 'PS' and status = 6-->
+    <!--</select>-->
 
 </mapper>

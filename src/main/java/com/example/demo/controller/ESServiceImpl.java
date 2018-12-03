@@ -33,10 +33,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  * @Date 2018/11/2 2:17 PM
  **/
 @Service
-public class ESServiceImpl implements ESService{
+public class ESServiceImpl implements ESService {
 
 //    @Autowired
 //    private ESRepository esRepository;
@@ -70,9 +67,10 @@ public class ESServiceImpl implements ESService{
     public void save() {
         Integer total = contentMapper.selectCount();
         int max = (int) total / 200;
+//        int max = 0;
         for (int i = 0; i <= max; i++) {
 
-            List<ContentModel> list = contentMapper.selectAllModel(i*200,200);
+            List<ContentModel> list = contentMapper.selectAllModel(i * 200, 200);
             System.out.println(list.size());
             List<Object> dataList = new ArrayList<>();
             for (ContentModel contentModel : list) {
@@ -86,7 +84,10 @@ public class ESServiceImpl implements ESService{
 //            }
             }
             try {
-            Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataList));
+                Map<String, Object> dataMap = new HashMap<>();
+                dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
+                dataMap.put("data",dataList);
+                Response response = OkHttpUtil.postJson("http://localhost:8080/new/contents", JSON.toJSONString(dataMap));
 //                Response response = OkHttpUtil.postJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
                 System.out.println(response.toString());
             } catch (Exception e) {
@@ -97,26 +98,34 @@ public class ESServiceImpl implements ESService{
 
     @Override
     public void delete() {
-//        List<ContentModel> list = contentMapper.selectAllModel();
-//        System.out.println(list.size());
-//        List<Object> dataList = new ArrayList<>();
-//        for (ContentModel contentModel : list) {
-//            Content esContent = new Content(contentModel);
-//            dataList.add(esContent.getContentId());
-//
-////            try {
-////                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
-////            } catch (Exception e) {
-////                e.printStackTrace();
-////            }
-//        }
-//        try {
-////            Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataList));
+        Integer total = contentMapper.selectCount();
+        int max = (int) total / 200;
+//        int max = 0;
+        for (int i = 0; i <= max; i++) {
+            List<ContentModel> list = contentMapper.selectAllModel(i * 200, 200);
+            System.out.println(list.size());
+            List<Object> dataList = new ArrayList<>();
+            for (ContentModel contentModel : list) {
+                Content esContent = new Content(contentModel);
+                dataList.add(esContent.getContentId());
+
+//            try {
+//                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+            }
+            try {
+                Map<String, Object> dataMap = new HashMap<>();
+                dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
+                dataMap.put("data",dataList);
+                Response response = OkHttpUtil.deleteJson("http://localhost:8080/new/contents", JSON.toJSONString(dataMap));
 //            Response response = OkHttpUtil.deleteJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
-//            System.out.println(response.toString());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+                System.out.println(response.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     //    @Override

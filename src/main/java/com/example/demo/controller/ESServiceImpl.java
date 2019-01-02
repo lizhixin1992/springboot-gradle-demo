@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.ContentMapper;
+import com.example.demo.model.CmsContent;
 import com.example.demo.model.Content;
 import com.example.demo.model.ContentModel;
 import com.example.demo.util.CalendarUtil;
@@ -74,7 +75,8 @@ public class ESServiceImpl implements ESService {
             System.out.println(list.size());
             List<Object> dataList = new ArrayList<>();
             for (ContentModel contentModel : list) {
-                Content esContent = new Content(contentModel);
+//                Content esContent = new Content(contentModel);
+                CmsContent esContent = new CmsContent(contentModel);
                 dataList.add(esContent);
 
 //            try {
@@ -87,9 +89,10 @@ public class ESServiceImpl implements ESService {
                 Map<String, Object> dataMap = new HashMap<>();
                 dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
                 dataMap.put("data",dataList);
+//                System.out.println(JsonUtil.toJson(dataMap));
                 Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataMap));
 //                Response response = OkHttpUtil.postJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));
-                System.out.println(response.toString());
+//                System.out.println(response.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }

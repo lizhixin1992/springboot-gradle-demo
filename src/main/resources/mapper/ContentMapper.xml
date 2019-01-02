@@ -62,6 +62,7 @@
         <result column="FILM_CP_ID" property="filmCpId" jdbcType="VARCHAR"/>
         <result column="sort" property="sort" jdbcType="INTEGER"/>
         <result column="ISEXQUISITE" property="isExquisite" jdbcType="INTEGER"/>
+        <result column="recentMsg" property="recentMsg" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="ResultMapWithBLOBs" type="com.example.demo.model.ContentModel" extends="BaseResultMap">
@@ -76,7 +77,7 @@
     AIRTIME, payStatus, isCanSearch, bidType, drm, Area, DELETEFLAG, DIRECTOR, LASTMODIFIEDDATE,
     LASTMODIFIEDUSERID, subCount, SERIESSUM,distributeChannelIds,finishDistributeChannelIds,mainProductId,
     mainVipFlag,channelProduct,LANGUAGE,REALEXCLUSIVE,OUT_ID,CR_CLASS_ID,PPV_CODE,DATA_PROVIDER,
-    PUBLISH_PLATFORM_IDS,FINISH_PLATFORM_IDS,CP_ID,FILM_CP_ID,ISEXQUISITE
+    PUBLISH_PLATFORM_IDS,FINISH_PLATFORM_IDS,CP_ID,FILM_CP_ID,ISEXQUISITE,recentMsg
   </sql>
     <sql id="Base_Column_List1">
     sm.CONTENTID CONTENTID, sm.MAMID MAMID, sm.UUID UUID, sm.TITLE TITLE, sm.SUBTITLE SUBTITLE, sm.PINYIN PINYIN, sm.TAGS TAGS, sm.CONTENTTYPE CONTENTTYPE, sm.VIDEOTYPE VIDEOTYPE,
@@ -92,11 +93,11 @@
     DESCRIPTION
   </sql>
     <select id="selectAllModel" resultMap="ResultMapWithBLOBs">
-        select * from content where contentType = 'PS' and status = 6 and siteId = 11 limit ${start},${size}
+        select * from content where status = 6 and siteId = 11 limit ${start},${size}
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">
-        select count(*) from content where contentType = 'PS' and status = 6 and siteId = 11
+        select count(*) from content where status = 6 and siteId = 11
     </select>
 
     <!--<select id="selectAllModel" resultMap="ResultMapWithBLOBs">-->

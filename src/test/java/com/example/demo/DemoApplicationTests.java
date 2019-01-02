@@ -7,6 +7,7 @@ package com.example.demo;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
+import io.searchbox.strings.StringUtils;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -73,11 +74,14 @@ public class DemoApplicationTests {
 //        System.out.println(JSON.toJSONString(list));
 
 
-        Map<String, Object> map = new HashMap<>();
-        map.put("1_1", "1111111111");
-        map.put("2_2", "22222222");
+//        Map<String, Object> map = new HashMap<>();
+//        map.put("1_1", "1111111111");
+//        map.put("2_2", "22222222");
+//
+//        System.out.println(map.get("1_2"));
 
-        System.out.println(map.get("1_2"));
+
+        System.out.println(StringUtils.isNotBlank(""));
 
     }
 

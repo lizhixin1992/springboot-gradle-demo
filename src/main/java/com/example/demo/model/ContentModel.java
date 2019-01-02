@@ -156,6 +156,9 @@ public class ContentModel implements Serializable {
     //显示用 二级栏目标题
     private String secondCategoryTitle;
 
+
+    private String recentMsg;
+
     public Integer getContentId() {
         return contentId;
     }
@@ -672,6 +675,14 @@ public class ContentModel implements Serializable {
 
     public void setSecondCategoryTitle(String secondCategoryTitle) {
         this.secondCategoryTitle = secondCategoryTitle;
+    }
+
+    public String getRecentMsg() {
+        return recentMsg;
+    }
+
+    public void setRecentMsg(String recentMsg) {
+        this.recentMsg = recentMsg;
     }
 
     @Override

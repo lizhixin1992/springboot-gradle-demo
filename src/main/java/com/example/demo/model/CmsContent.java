@@ -34,12 +34,10 @@ public class CmsContent {
     private String hImage;
     private String subtitle;
     private Long vipFlag;
-    private String UUID;
+    private String uuid;
     private Integer movieLevel;
     private Integer periods;
     private Integer drm;
-//    private Integer recentNum;
-//    private Integer isFinish;
     private Object category;
     private Integer duration;
     private Integer realExclusive;
@@ -70,18 +68,15 @@ public class CmsContent {
         this.hImage = content.gethImage();
         this.subtitle = content.getSubTitle();
         this.vipFlag = 1L;
-        this.UUID = content.getUuid();
+        this.uuid = content.getUuid();
         this.movieLevel = content.getMovieLevel();
-        this.periods = 0;
         this.drm = content.getDrm();
-//        this.recentNum = 0;
-//        this.isFinish = 0;
         this.duration = content.getDuration();
         this.realExclusive = content.getRealExclusive();
 
         Map<String, String> classifymap = new HashMap<>();
-        classifymap.put("first", content.getVideoClass());
-        classifymap.put("second", content.getVideoType());
+        classifymap.put("first", content.getVideoType());
+        classifymap.put("second", content.getVideoClass());
         this.classify = classifymap;
 
 

@@ -93,11 +93,11 @@
     DESCRIPTION
   </sql>
     <select id="selectAllModel" resultMap="ResultMapWithBLOBs">
-        select * from content where status = 6 and siteId = 11 limit ${start},${size}
+        select * from content where status = 6 and siteId = 11 and contentType = 'PS' limit ${start},${size}
     </select>
 
     <select id="selectCount" resultType="java.lang.Integer">
-        select count(*) from content where status = 6 and siteId = 11
+        select count(*) from content where status = 6 and siteId = 11 and contentType = 'PS'
     </select>
 
     <!--<select id="selectAllModel" resultMap="ResultMapWithBLOBs">-->

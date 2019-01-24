@@ -81,8 +81,14 @@ public class DemoApplicationTests {
 //        System.out.println(map.get("1_2"));
 
 
-        System.out.println(StringUtils.isNotBlank(""));
+//        System.out.println(StringUtils.isNotBlank(""));
 
+
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.remove(list.size()-1);
+        System.out.println(JSON.toJSONString(list));
+        list.remove(list.size()-1);
     }
 
 }

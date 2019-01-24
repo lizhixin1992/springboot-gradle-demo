@@ -36,8 +36,10 @@ public class OkHttpUtil {
                     .post(requestBody)
                     .url(url)
                     .header("User-Agent", "")
-//                    .addHeader("Authorization", "QmFzaWMgMTAwMDAwMDA6YzAzZmIzYmFkMzhkNGQyMGFmYzZlZGY3MzJlZDRiYzY=")
-                    .addHeader("Authorization", "QmFzaWMgY21zOjAzYTFmMjhmOGQ2NjQ1N2FiZTcwNTM1MjdjYjNiNjNj")
+//                    .addHeader("Authorization", "acb1b986e93be49d8d9b684bfd382fc6aa0d2e85")
+//                    .addHeader("cpCode", "10000000")
+                    .addHeader("Authorization", "6181ca08c22e04658f653bfc7f1d8ed7522b082d")
+                    .addHeader("cpCode", "cms")
                     .build();
 
             response = okHttpClient.newCall(request).execute();
@@ -74,7 +76,10 @@ public class OkHttpUtil {
                     .delete(requestBody)
                     .url(url)
                     .header("User-Agent", "")
-                    .addHeader("Authorization", "QmFzaWMgMTAwMDAwMDA6YzAzZmIzYmFkMzhkNGQyMGFmYzZlZGY3MzJlZDRiYzY=")
+                    .addHeader("Authorization", "acb1b986e93be49d8d9b684bfd382fc6aa0d2e85")
+                    .addHeader("cpCode", "10000000")
+//                    .addHeader("Authorization", "6181ca08c22e04658f653bfc7f1d8ed7522b082d")
+//                    .addHeader("cpCode", "cms")
                     .build();
 
             response = okHttpClient.newCall(request).execute();

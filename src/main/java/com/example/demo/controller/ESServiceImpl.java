@@ -67,11 +67,11 @@ public class ESServiceImpl implements ESService {
     @Override
     public void save() {
         Integer total = contentMapper.selectCount();
-        int max = (int) total / 200;
+        int max = (int) total / 20;
 //        int max = 0;
         for (int i = 0; i <= max; i++) {
 
-            List<ContentModel> list = contentMapper.selectAllModel(i * 200, 200);
+            List<ContentModel> list = contentMapper.selectAllModel(i * 20, 20);
             System.out.println(list.size());
             List<Object> dataList = new ArrayList<>();
             for (ContentModel contentModel : list) {

@@ -84,11 +84,34 @@ public class DemoApplicationTests {
 //        System.out.println(StringUtils.isNotBlank(""));
 
 
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.remove(list.size()-1);
-        System.out.println(JSON.toJSONString(list));
-        list.remove(list.size()-1);
+//        List<String> list = new ArrayList<>();
+//        list.add("1");
+//        list.remove(list.size()-1);
+//        System.out.println(JSON.toJSONString(list));
+//        list.remove(list.size()-1);
+
+//        Random random = new Random();
+//        System.out.println(random.nextInt(1000));
+//        System.out.println(random.nextInt(1000));
+
+        int a = 1;
+        int b = 2;
+
+        try {
+
+            System.out.println("b = " + b);
+            b = 1 / 0;       //B
+            System.out.println("b = " + b);
+            System.out.println("a = " + a);
+            a = 3;           //A
+            System.out.println("a = " + a);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("a = " + a);
+//            System.out.println("b = " + b);
+        } finally {
+            System.out.print("a = " + a);
+        }
     }
 
 }

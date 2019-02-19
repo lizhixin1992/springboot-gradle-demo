@@ -2,10 +2,7 @@ package com.example.demo.model;
 
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName
@@ -83,11 +80,11 @@ public class CmsContent {
         classifymap.put("second", content.getVideoClass());
         this.classify = classifymap;
 
-
+        Random random = new Random();
         List<Object> categoryList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Map<String, String> categorymap = new HashMap<>();
-            categorymap.put("id", "11");
+            categorymap.put("id", random.nextInt(1000) + "");
             categorymap.put("name", "CCTV");
             categoryList.add(categorymap);
         }
@@ -96,7 +93,7 @@ public class CmsContent {
         List<Object> secondCategoryList = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Map<String, String> categorymap = new HashMap<>();
-            categorymap.put("id", "68");
+            categorymap.put("id", random.nextInt(1000) + "");
             categorymap.put("name", "CCTV-1");
             secondCategoryList.add(categorymap);
         }

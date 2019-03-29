@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import io.searchbox.strings.StringUtils;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
@@ -94,24 +95,59 @@ public class DemoApplicationTests {
 //        System.out.println(random.nextInt(1000));
 //        System.out.println(random.nextInt(1000));
 
-        int a = 1;
-        int b = 2;
-
-        try {
-
-            System.out.println("b = " + b);
-            b = 1 / 0;       //B
-            System.out.println("b = " + b);
-            System.out.println("a = " + a);
-            a = 3;           //A
-            System.out.println("a = " + a);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("a = " + a);
+//        int a = 1;
+//        int b = 2;
+//
+//        try {
+//
 //            System.out.println("b = " + b);
-        } finally {
-            System.out.print("a = " + a);
-        }
+//            b = 1 / 0;       //B
+//            System.out.println("b = " + b);
+//            System.out.println("a = " + a);
+//            a = 3;           //A
+//            System.out.println("a = " + a);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            System.out.println("a = " + a);
+////            System.out.println("b = " + b);
+//        } finally {
+//            System.out.print("a = " + a);
+//        }
+
+//        Object[] a = null;
+//        for (Object o : a) {
+//            System.out.println(o);
+//        }
+//        for (int i = 0; i < a.length; i++) {
+//            Object o = a[i];
+//            System.out.println(o);
+//        }
+
+//        ConcurrentLinkedQueue queue = new ConcurrentLinkedQueue();
+//        queue.offer("A");
+//        queue.offer("B");
+//        queue.offer("C");
+//
+//        queue.poll();
+//        queue.poll();
+//        queue.poll();
+
+
+//        List<Object> list = new ArrayList<>();
+////        Map<String, Object> map = new HashMap<>();
+////        map.put("1",null);
+////        map.put("2","");
+////        map.put("3",null);
+////        map.put("4","");
+////        map.put("5",null);
+////        map.put("6","");
+////        map.put("7",null);
+////        list.add(map);
+////        System.out.println(JSON.toJSONString(list));
+
+        String s = "11|22|33|";
+        System.out.println(s.contains(""));
+
     }
 
 }

@@ -69,14 +69,14 @@ public class ESServiceImpl implements ESService {
         Integer total = contentMapper.selectCount();
         int max = (int) total / 20;
 //        int max = 0;
-        for (int i = 0; i <= max; i++) {
+        for (int i = 0; i <= 0; i++) {
 
             List<ContentModel> list = contentMapper.selectAllModel(i * 20, 20);
             System.out.println(list.size());
             List<Object> dataList = new ArrayList<>();
             for (ContentModel contentModel : list) {
-//                Content esContent = new Content(contentModel);
-                CmsContent esContent = new CmsContent(contentModel);
+                Content esContent = new Content(contentModel);
+//                CmsContent esContent = new CmsContent(contentModel);
                 dataList.add(esContent);
 
 //            try {
@@ -87,7 +87,7 @@ public class ESServiceImpl implements ESService {
             }
             try {
                 Map<String, Object> dataMap = new HashMap<>();
-                dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
+                dataMap.put("callBackUrl","");
                 dataMap.put("data",dataList);
 //                System.out.println(JsonUtil.toJson(dataMap));
                 Response response = OkHttpUtil.postJson("http://localhost:8080/contents", JSON.toJSONString(dataMap));
@@ -104,13 +104,13 @@ public class ESServiceImpl implements ESService {
         Integer total = contentMapper.selectCount();
         int max = (int) total / 200;
 //        int max = 0;
-        for (int i = 0; i <= max; i++) {
+        for (int i = 0; i <= 0; i++) {
             List<ContentModel> list = contentMapper.selectAllModel(i * 200, 200);
             System.out.println(list.size());
             List<Object> dataList = new ArrayList<>();
             for (ContentModel contentModel : list) {
                 Content esContent = new Content(contentModel);
-                dataList.add(esContent.getContentId());
+                dataList.add(esContent.getContentId() + "");
 
 //            try {
 //                JestUtil.indexDoc("content.test", esContent, UUID.randomUUID().toString().replaceAll("-",""));
@@ -120,7 +120,7 @@ public class ESServiceImpl implements ESService {
             }
             try {
                 Map<String, Object> dataMap = new HashMap<>();
-                dataMap.put("callBackUrl","http://localhost:8090/test/callBack");
+                dataMap.put("callBackUrl","");
                 dataMap.put("data",dataList);
                 Response response = OkHttpUtil.deleteJson("http://localhost:8080/contents", JSON.toJSONString(dataMap));
 //            Response response = OkHttpUtil.deleteJson("http://192.168.75.203:9201/contents", JSON.toJSONString(dataList));

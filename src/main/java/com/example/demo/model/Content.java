@@ -58,7 +58,7 @@ public class Content {
 
     private String appId;
 
-    private String contentId;
+    private Integer contentId;
 
     private String uri;
 
@@ -176,7 +176,7 @@ public class Content {
         }
 
         appId = "com.newtv.cboxtv";
-        contentId = contentModel.getContentId().toString();
+        contentId = contentModel.getContentId();
         definition =  StringUtils.isNotEmpty(contentModel.getDefinition()) ? contentModel.getDefinition() : "SD";
         grade = contentModel.getGrade() != null ? contentModel.getGrade() + "" : "0";
         hImage = StringUtils.isNotEmpty(contentModel.gethImage()) ? contentModel.gethImage() : contentModel.getvImage();

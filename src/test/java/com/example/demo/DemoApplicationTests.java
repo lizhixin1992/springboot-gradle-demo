@@ -6,13 +6,17 @@ package com.example.demo;
 //import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.util.JsonUtil;
 import com.google.common.collect.Lists;
+import com.google.gson.JsonElement;
 import io.searchbox.strings.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -145,9 +149,292 @@ public class DemoApplicationTests {
 ////        list.add(map);
 ////        System.out.println(JSON.toJSONString(list));
 
-        String s = "11|22|33|";
-        System.out.println(s.contains(""));
+//        String s = "11|22|33|";
+//        System.out.println(s.contains(""));
 
+//        String[] retIds = new String[3];
+//        String a = retIds[0];
+//        System.out.println("a".contains(a));
+
+//        Map<String, String> map = new HashMap<>();
+//        System.out.println(map.get("1"));
+
+//        JsonElement jsonElement = JsonUtil.fromJson("\"11111\"");
+//        String contentId = jsonElement.getAsString();
+
+//        for (int i = 0; i < 10; i++) {
+//            try {
+//                if(i == 5){
+//                    System.out.println(5/0);
+//                }
+//                System.out.println(i);
+//            } catch (Exception e) {
+//                continue;
+//            }
+//        }
+
+//        Set<String> a = new LinkedHashSet<>();
+//        a.add("http://localhost:9201");
+//        a.add("http://localhost:9202");
+//        a.add("http://localhost:9203");
+//        a.add("http://localhost:9200");
+//
+//        for (String s : a) {
+//            System.out.println(s);
+//        }
+//
+//        a.remove("http://localhost:9200");
+//        System.out.println("-----------------------------------");
+//        for (String s : a) {
+//            System.out.println(s);
+//        }
+
+//        String a = " xwlb 1128 ";
+//        System.out.println(a);
+//        a.trim();
+//        System.out.println(a);
+
+//        System.out.println("wewewehmjzdewewe".indexOf("hmjz"));
+
+
+//        Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？\\s¥《》「」_\"]");
+////        String key = "<em>ewewewewewew</em>";
+////        String key = "<em>（ewewewewewew</em>";
+////        String key = "<em>ewewewewewew）</em>";
+////        String key = "<em>（ewewewewewew）</em>";
+////        String key = "wewe<em>'（ewewew!！！！！ewe!!wew）'</em>";
+////        String key = "<em>（ewewe！wewewew</em>";
+////        String key = "<em>ewewewe！wewew）</em>";
+////        String key = "<em>ewewew！ewewew</em>";
+//        String key = "1213123<em>'（ewewew！！！！ewewew#$</em>32424234<em>we!we）'</em>123123213";
+
+//        int a = -1;
+//        List<Map<Integer, String>> list = new ArrayList<>();
+//        String[] strArr = key.split("</em>");
+//        for (String str : strArr) {
+//            Matcher m = pattern.matcher(str);
+//            while (m.find()) {
+//                System.out.println(str.length() + "----------------------");
+//                System.out.println(m.start());
+//                System.out.println(m.end());
+//
+//                if (m.start() == 4) {
+//                    System.out.println("左边");
+//                    System.out.println(str.substring(m.start(), m.end()));
+//                    Map<Integer, String> map = new HashMap<>();
+//                    map.put(m.start(), str.substring(m.start(), m.end()) + "<em>");
+//                    list.add(map);
+//                } else if (m.start() == (str.length() - 1)) {
+//                    System.out.println("右边");
+//                    System.out.println(str.substring(m.start(), m.end()));
+//                    Map<Integer, String> map = new HashMap<>();
+//                    map.put(m.start(), str.substring(m.start(), m.end()) + "</em>");
+//                    list.add(map);
+//                } else if (m.start() > 4 && m.start() < (str.length() - 1)) {
+//                    System.out.println("中间");
+//                    System.out.println(str.substring(m.start(), m.end()));
+//                    Map<Integer, String> map = new HashMap<>();
+//                    if (a != (m.start() - 1)) {
+//                        map.put(m.start(), str.substring(m.start(), m.end()) + "</em>");
+//                        list.add(map);
+//                    }
+//                    a = m.start();
+//                }
+//            }
+//        }
+//
+//        System.out.println(list.toString());
+
+
+//        int a = -1;
+//        List<Integer> list = new ArrayList<>();
+//        String[] strArr = key.split("</em>");
+//        for (String str : strArr) {
+//            System.out.println(str);
+//            String[] str1 = str.split("<em>");
+//            for (String s : str1) {
+//                System.out.println(s);
+//                Matcher m = pattern.matcher(s);
+//                while (m.find()) {
+//                    System.out.println(str.length() + "----------------------");
+//                    System.out.println(m.start());
+//                    System.out.println(m.end());
+//
+//                    if (m.start() == 4) {
+//                        System.out.println("左边");
+//                        System.out.println(str.substring(m.start(), m.end()));
+//                        list.add(m.start());
+//                    } else if (m.start() == (str.length() - 1)) {
+//                        System.out.println("右边");
+//                        System.out.println(str.substring(m.start(), m.end()));
+//                        list.add(m.start());
+//                    } else if (m.start() > 4 && m.start() < (str.length() - 1)) {
+//                        System.out.println("中间");
+//                        System.out.println(str.substring(m.start(), m.end()));
+//                        list.add(m.start());
+//                    }
+//                }
+//            }
+//        }
+//        System.out.println(list.toString());
+
+//        wewe<em>'（ewewew!！！！！ewe!!wew）'</em>
+//        List<Integer> list = new ArrayList<>();
+//        Matcher m = pattern.matcher(key);
+//        System.out.println(key.length() + "----------------------");
+//        while (m.find()) {
+////            System.out.println(m.start());
+////            System.out.println(m.end());
+////
+////            System.out.println(key.substring(m.start(), m.end()));
+//            list.add(m.start());
+//        }
+//        System.out.println("特殊符号:" + list.toString());
+
+
+//        for (Integer i : list) {
+//            if(i < 4){
+//
+//            }else if(i == 4){
+//                System.out.println("最左边");
+//            }else if (i == (key.length() - 6)) {
+//                System.out.println("最右边");
+//            }else if (i > 4 && i < (key.length() - 6)) {
+//                System.out.println("中间");
+//            }
+//        }
+
+//        List<Integer> list1 = new ArrayList<>();
+//        Pattern pattern1 = Pattern.compile("<em>");
+//        Matcher m1 = pattern1.matcher(key);
+//        while (m1.find()) {
+////            System.out.println(m1.start());
+////            System.out.println(m1.end());
+////
+////            System.out.println(key.substring(m1.start(), m1.end()));
+//            list1.add(m1.start());
+//        }
+//        System.out.println("<em>:" + list1.toString());
+//
+//
+//        List<Integer> list2 = new ArrayList<>();
+//        Pattern pattern2 = Pattern.compile("</em>");
+//        Matcher m2 = pattern2.matcher(key);
+//        while (m2.find()) {
+////            System.out.println(m2.start());
+////            System.out.println(m2.end());
+////
+////            System.out.println(key.substring(m2.start(), m2.end()));
+//            list2.add(m2.end());
+//        }
+//        System.out.println("</em>" + list2.toString());
+//
+//
+//        StringBuffer data = new StringBuffer();
+//        data.append(setEM(key.substring(7, 36)));
+//
+//        data.append(setEM(key.substring(36, 52)));
+//
+//        if(list2.get(list2.size()-1) != key.length()){
+//            data.append(key.substring(list2.get(list2.size()-1),key.length()));
+//        }
+//
+//        System.out.println(data.toString());
+
+
+        String key ="<em>ss{</em>";
+        String data = "";
+        Integer offset = 6;
+        if (offset.equals(4)) {
+            data = key.replace(key.substring(0, offset + 1), key.substring(offset, offset + 1) + "<em>");
+        } else if (offset.equals(key.length() - 6)) {
+            data = key.replace(key.substring(offset, offset + 6), "</em>" + key.substring(offset, offset + 1));
+        } else if (offset > 4 && offset < (key.length() - 6)) {
+            data = key.replace(key.substring(offset, offset + 1), "</em>" + key.substring(offset, offset + 1) + "<em>");
+        }
+        System.out.println(data);
+
+
+    }
+
+
+    private static String setEM(String key) {
+        Pattern pattern = Pattern.compile("[`~!@#$%^&*()+=|{}':;',\\[\\].?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？\\s¥《》「」_\"]");
+        List<Integer> list = new ArrayList<>();
+        Map<String, Object> map = new HashMap<>();
+        Matcher ma = pattern.matcher(key);
+        while (ma.find()) {
+            list.add(ma.start());
+        }
+        System.out.println(key);
+        System.out.println("key长度:" + key.length());
+        System.out.println("特殊符号:" + list.toString());
+
+        String newKey = "";
+        int m = 0;
+        int n = 1;
+        for (int i = 0; i < list.size(); i++) {
+            m = list.size() - n + 1;
+            if (n > list.size() - 1) {
+                break;
+            }
+            for (int j = 1; j < m; j++) {
+                if (list.get(i + j - 1) + 1 == list.get(n)) {
+                    if (n == list.size() - 1) {
+                        if(i == 0){
+                            map = rep(i, n, key, list);
+                        }else {
+                            map = rep(i, n, newKey, list);
+                        }
+                        newKey = (String)map.get("newKey");
+                        list = (List<Integer>) map.get("list");
+                        i = n - 1;
+                        n = n + 1;
+                    } else {
+                        n++;
+                        continue;
+                    }
+                } else {
+                    if(i == 0){
+                        map = rep(i, n, key, list);
+                    }else {
+                        map = rep(i, n, newKey, list);
+                    }
+                    newKey = (String)map.get("newKey");
+                    list = (List<Integer>) map.get("list");
+                    i = n - 1;
+                    n = n + 1;
+                    break;
+                }
+            }
+        }
+
+        return newKey;
+    }
+
+    private static Map<String,Object> rep(Integer i,Integer n,String key,List<Integer> list){
+        Map<String, Object> map = new HashMap<>();
+        String data = "";
+        System.out.println("i:" + i + ",n:" + n);
+        if (list.get(i).equals(4)) {
+//            System.out.println(key.substring(0, list.get(n - 1) + 1));
+//            System.out.println(key.substring(list.get(i), list.get(n - 1) + 1) + "<em>");
+            data = key.replace(key.substring(0, list.get(n - 1) + 1), key.substring(list.get(i), list.get(n - 1) + 1) + "<em>");
+        } else if (list.get(n).equals(key.length() - 6)) {
+//            System.out.println(key.substring(list.get(i), list.get(n) + 6));
+//            System.out.println("</em>" + key.substring(list.get(i), list.get(n) + 1));
+            data = key.replace(key.substring(list.get(i), list.get(n) + 6), "</em>" + key.substring(list.get(i), list.get(n) + 1));
+        }else if(list.get(i) > 4 && list.get(n) < (key.length() - 6)){
+//            System.out.println(key.substring(list.get(i),list.get(n-1) + 1));
+//            System.out.println("</em>" + key.substring(list.get(i),list.get(n-1) + 1) + "<em>");
+            data = key.replace(key.substring(list.get(i), list.get(n-1) + 1), "</em>" + key.substring(list.get(i), list.get(n-1) + 1) + "<em>");
+            list = list.stream().map(var1 -> var1 + 9).collect(Collectors.toList());
+
+        }
+        System.out.println(data);
+        map.put("newKey", data);
+        map.put("list", list);
+        return map;
     }
 
 }

@@ -5,6 +5,7 @@ package com.example.demo;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.test.context.junit4.SpringRunner;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.alibaba.fastjson.JSON;
 import com.example.demo.util.JsonUtil;
 import com.google.common.collect.Lists;
@@ -342,19 +343,55 @@ public class DemoApplicationTests {
 //        System.out.println(data.toString());
 
 
-        String key ="<em>ss{</em>";
-        String data = "";
-        Integer offset = 6;
-        if (offset.equals(4)) {
-            data = key.replace(key.substring(0, offset + 1), key.substring(offset, offset + 1) + "<em>");
-        } else if (offset.equals(key.length() - 6)) {
-            data = key.replace(key.substring(offset, offset + 6), "</em>" + key.substring(offset, offset + 1));
-        } else if (offset > 4 && offset < (key.length() - 6)) {
-            data = key.replace(key.substring(offset, offset + 1), "</em>" + key.substring(offset, offset + 1) + "<em>");
+//        String key ="<em>ss{</em>";
+//        String data = "";
+//        Integer offset = 6;
+//        if (offset.equals(4)) {
+//            data = key.replace(key.substring(0, offset + 1), key.substring(offset, offset + 1) + "<em>");
+//        } else if (offset.equals(key.length() - 6)) {
+//            data = key.replace(key.substring(offset, offset + 6), "</em>" + key.substring(offset, offset + 1));
+//        } else if (offset > 4 && offset < (key.length() - 6)) {
+//            data = key.replace(key.substring(offset, offset + 1), "</em>" + key.substring(offset, offset + 1) + "<em>");
+//        }
+//        System.out.println(data);
+
+
+        String str = "123abcd345adsd1";
+        char[] ch = str.toCharArray();
+        int len = str.length();
+        int i = 0;
+        StringBuffer newStr = new StringBuffer();
+        int type = 0;
+        Pattern pattern = Pattern.compile("^[0-9]*$");
+        System.out.println(pattern.matcher("1").find());
+        while (true) {
+            if (pattern.matcher(String.valueOf(ch[i])).find()) {
+                type = 1;
+            } else {
+                type = 2;
+            }
+            if (i < len - 1) {
+                if (type == 1 && !pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+                    newStr.append(ch[i] + " ");
+                } else if (type == 1 && pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+                    newStr.append(ch[i]);
+                }
+                if (type == 2 && pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+                    newStr.append(ch[i] + " ");
+                } else if (type == 2 && !pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+                    newStr.append(ch[i]);
+                }
+                i++;
+                if (i > len) {
+                    break;
+                }
+            } else {
+                newStr.append(ch[i]);
+                break;
+            }
+
         }
-        System.out.println(data);
-
-
+        System.out.println(newStr.toString());
     }
 
 
@@ -381,12 +418,12 @@ public class DemoApplicationTests {
             for (int j = 1; j < m; j++) {
                 if (list.get(i + j - 1) + 1 == list.get(n)) {
                     if (n == list.size() - 1) {
-                        if(i == 0){
+                        if (i == 0) {
                             map = rep(i, n, key, list);
-                        }else {
+                        } else {
                             map = rep(i, n, newKey, list);
                         }
-                        newKey = (String)map.get("newKey");
+                        newKey = (String) map.get("newKey");
                         list = (List<Integer>) map.get("list");
                         i = n - 1;
                         n = n + 1;
@@ -395,12 +432,12 @@ public class DemoApplicationTests {
                         continue;
                     }
                 } else {
-                    if(i == 0){
+                    if (i == 0) {
                         map = rep(i, n, key, list);
-                    }else {
+                    } else {
                         map = rep(i, n, newKey, list);
                     }
-                    newKey = (String)map.get("newKey");
+                    newKey = (String) map.get("newKey");
                     list = (List<Integer>) map.get("list");
                     i = n - 1;
                     n = n + 1;
@@ -412,7 +449,7 @@ public class DemoApplicationTests {
         return newKey;
     }
 
-    private static Map<String,Object> rep(Integer i,Integer n,String key,List<Integer> list){
+    private static Map<String, Object> rep(Integer i, Integer n, String key, List<Integer> list) {
         Map<String, Object> map = new HashMap<>();
         String data = "";
         System.out.println("i:" + i + ",n:" + n);
@@ -424,10 +461,10 @@ public class DemoApplicationTests {
 //            System.out.println(key.substring(list.get(i), list.get(n) + 6));
 //            System.out.println("</em>" + key.substring(list.get(i), list.get(n) + 1));
             data = key.replace(key.substring(list.get(i), list.get(n) + 6), "</em>" + key.substring(list.get(i), list.get(n) + 1));
-        }else if(list.get(i) > 4 && list.get(n) < (key.length() - 6)){
+        } else if (list.get(i) > 4 && list.get(n) < (key.length() - 6)) {
 //            System.out.println(key.substring(list.get(i),list.get(n-1) + 1));
 //            System.out.println("</em>" + key.substring(list.get(i),list.get(n-1) + 1) + "<em>");
-            data = key.replace(key.substring(list.get(i), list.get(n-1) + 1), "</em>" + key.substring(list.get(i), list.get(n-1) + 1) + "<em>");
+            data = key.replace(key.substring(list.get(i), list.get(n - 1) + 1), "</em>" + key.substring(list.get(i), list.get(n - 1) + 1) + "<em>");
             list = list.stream().map(var1 -> var1 + 9).collect(Collectors.toList());
 
         }

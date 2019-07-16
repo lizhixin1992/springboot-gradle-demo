@@ -5,20 +5,16 @@ package com.example.demo;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.test.context.junit4.SpringRunner;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
-import com.alibaba.fastjson.JSON;
-import com.example.demo.util.JsonUtil;
-import com.google.common.collect.Lists;
-import com.google.gson.JsonElement;
-import io.searchbox.strings.StringUtils;
+import com.example.demo.wltea.analyzer.cfg.Configuration;
+import com.example.demo.wltea.analyzer.core.IKSegmenter;
+import com.example.demo.wltea.analyzer.core.Lexeme;
+import org.elasticsearch.common.settings.Settings;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 //@RunWith(SpringRunner.class)
@@ -356,42 +352,54 @@ public class DemoApplicationTests {
 //        System.out.println(data);
 
 
-        String str = "123abcd345adsd1";
-        char[] ch = str.toCharArray();
-        int len = str.length();
-        int i = 0;
-        StringBuffer newStr = new StringBuffer();
-        int type = 0;
-        Pattern pattern = Pattern.compile("^[0-9]*$");
-        System.out.println(pattern.matcher("1").find());
-        while (true) {
-            if (pattern.matcher(String.valueOf(ch[i])).find()) {
-                type = 1;
-            } else {
-                type = 2;
-            }
-            if (i < len - 1) {
-                if (type == 1 && !pattern.matcher(String.valueOf(ch[i + 1])).find()) {
-                    newStr.append(ch[i] + " ");
-                } else if (type == 1 && pattern.matcher(String.valueOf(ch[i + 1])).find()) {
-                    newStr.append(ch[i]);
-                }
-                if (type == 2 && pattern.matcher(String.valueOf(ch[i + 1])).find()) {
-                    newStr.append(ch[i] + " ");
-                } else if (type == 2 && !pattern.matcher(String.valueOf(ch[i + 1])).find()) {
-                    newStr.append(ch[i]);
-                }
-                i++;
-                if (i > len) {
-                    break;
-                }
-            } else {
-                newStr.append(ch[i]);
-                break;
-            }
+//        String str = "颠三倒四的wewew";
+//        char[] ch = str.toCharArray();
+//        int len = str.length();
+//        int i = 0;
+//        StringBuffer newStr = new StringBuffer();
+//        int type = 0;
+//        Pattern pattern = Pattern.compile("^[0-9]*$");
+//        System.out.println(pattern.matcher("1").find());
+//        while (true) {
+//            if (pattern.matcher(String.valueOf(ch[i])).find()) {
+//                type = 1;
+//            } else {
+//                type = 2;
+//            }
+//            if (i < len - 1) {
+//                if (type == 1 && !pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+//                    newStr.append(ch[i] + " ");
+//                } else if (type == 1 && pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+//                    newStr.append(ch[i]);
+//                }
+//                if (type == 2 && pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+//                    newStr.append(ch[i] + " ");
+//                } else if (type == 2 && !pattern.matcher(String.valueOf(ch[i + 1])).find()) {
+//                    newStr.append(ch[i]);
+//                }
+//                i++;
+//                if (i > len) {
+//                    break;
+//                }
+//            } else {
+//                newStr.append(ch[i]);
+//                break;
+//            }
+//
+//        }
+//        System.out.println(newStr.toString());
 
+        Settings settings = Settings.Builder.EMPTY_SETTINGS;
+        IKSegmenter ikSegmenter = new IKSegmenter(new StringReader("aewew121212"),new Configuration(null, settings ));
+        try {
+            Lexeme lex = ikSegmenter.next();
+            while(lex != null){
+                System.out.println(lex);
+                lex = ikSegmenter.next();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        System.out.println(newStr.toString());
     }
 
 

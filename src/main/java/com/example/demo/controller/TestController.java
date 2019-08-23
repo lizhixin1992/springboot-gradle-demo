@@ -7,6 +7,7 @@ import org.elasticsearch.search.SearchHits;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,4 +63,13 @@ public class TestController {
 //        jsonObject.put("size",list.size());
 //        return new ResponseEntity(jsonObject, HttpStatus.OK);
 //    }
+
+
+    @GetMapping("/exce")
+    public String showInfo(){
+        System.err.println("dddddddddddddd");
+        String info ="你好";
+        int a = 1/0;
+        return info;
+    }
 }

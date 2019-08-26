@@ -132,6 +132,6 @@ public class GlobalExceptionHandler {
 //        ex.printStackTrace();
 //        log.error(String.format(logExceptionFormat, code, ex.getMessage()));
         rabbitTemplate.convertAndSend("exchange", "topic.message", ex.getDevMessage());
-        return JsonResult.failed(code, ex.getMessage());
+        return JsonResult.failed(ex.getErrorCode(), ex.getErrorMessage());
     }
 }

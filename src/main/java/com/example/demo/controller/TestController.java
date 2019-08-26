@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.globalException.BaseException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -67,8 +68,13 @@ public class TestController {
 
     @GetMapping("/exce")
     public String showInfo(){
-        String info ="你好";
-        int a = 1/0;
-        return info;
+        try {
+            String info ="你好";
+            int a = 1/0;
+            return info;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BaseException.customerException("fail", 10001, "/test/exce 异常,异常信息:" + e.getMessage());
+        }
     }
 }

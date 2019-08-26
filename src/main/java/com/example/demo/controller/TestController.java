@@ -67,7 +67,6 @@ public class TestController {
 
     @GetMapping("/exce")
     public String showInfo(){
-        System.err.println("dddddddddddddd");
         String info ="你好";
         int a = 1/0;
         return info;

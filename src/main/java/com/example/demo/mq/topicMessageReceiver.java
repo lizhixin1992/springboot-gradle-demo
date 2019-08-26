@@ -1,5 +1,6 @@
 package com.example.demo.mq;
 
+import com.example.demo.util.MailUtil;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -16,5 +17,6 @@ public class topicMessageReceiver {
     @RabbitHandler
     public void process(String msg) {
         System.out.println("topicMessageReceiver  : " +msg);
+        MailUtil.contextLoads(msg);
     }
 }

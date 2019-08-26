@@ -3,6 +3,7 @@ package com.example.demo.globalException;
 import com.example.demo.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.ConversionNotSupportedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 
 /**
@@ -25,6 +27,9 @@ public class GlobalExceptionHandler {
 
     private static final String logExceptionFormat = "Capture Exception By GlobalExceptionHandler: Code: %s Detail: %s";
     private static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @Resource
+    private AmqpTemplate rabbitTemplate;
 
     //运行时异常
     @ExceptionHandler(RuntimeException.class)
@@ -125,7 +130,8 @@ public class GlobalExceptionHandler {
 
     private <T extends Throwable> String resultFormat(Integer code, T ex) {
         ex.printStackTrace();
-        log.error(String.format(logExceptionFormat, code, ex.getMessage()));
+//        log.error(String.format(logExceptionFormat, code, ex.getMessage()));
+        rabbitTemplate.convertAndSend("exchange", "topic.message", ex.getMessage());
         return JsonResult.failed(code, ex.getMessage());
     }
 }
